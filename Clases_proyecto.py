@@ -101,8 +101,96 @@ class Cuenta:
     #Metodo String
     def __str__(self):
         return f'Saldo en cuenta: {self._saldo:0.2f}'
-
-        
     
-
     
+    class fecha():
+
+
+    # init method or constructor
+    def __init__(self, year ,month ,day ):
+        self.dia = day
+        self.mes = month
+        self.año = year
+
+
+    def validar(self):
+        mes = int(self.mes)
+        año = int(self.año)
+        dia = int(self.dia)
+
+        if (año < 1900 or año > 2021 ):
+            print("año invalido")
+            exit()
+        else:
+            print("año valido")
+
+        if (mes < 1 or mes > 12):
+            print("mes invalido")
+            exit()
+        else:
+            print("mes valido")
+
+        bisiesto = False
+        if año % 4 != 0:  # no divisible entre 4
+            bisiesto = False
+        elif año % 4 == 0 and año % 100 != 0:  # divisible entre 4 y no entre 100 o 400
+            bisiesto = True
+        elif año % 4 == 0 and año % 100 == 0 and año % 400 != 0:  # divisible entre 4 y 10 y no entre 400
+            bisiesto = False
+        elif año % 4 == 0 and año % 100 == 0 and año % 400 == 0:  # divisible entre 4, 100 y 400
+            bisiesto = True
+
+        print(bisiesto)
+        diasmes = 0
+        if mes in [4, 6, 9, 11]:
+            diasmes = 30
+            # Febrero depende de si es o no bisiesto
+        if mes == 2:
+            if bisiesto == True:
+                diasmes = 29
+            else:
+                diasmes = 28
+        else:
+            # En caso contrario, tiene 31 días
+            diasmes = 31
+        print(diasmes)
+
+        if (dia < 1 or dia > diasmes):
+            print("día invalido")
+            exit()
+        else:
+            print("dia valido")
+    def generar_fecha_letra(self):
+        mes = int(self.mes)
+        año = int(self.año)
+        dia = int(self.dia)
+        d1 = datetime(año, mes, dia)
+
+        def current_date_format(d1):
+            months = ("Enero", "Febrero", "Marzo", "Abri", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre",
+                      "Noviembre", "Diciembre")
+            day = d1.day
+            month = months[d1.month - 1]
+            year = d1.year
+            messsage = "{} de {} del {}".format(day, month, year)
+            return messsage
+        print (current_date_format(d1))
+    def _str_(self):
+        mes = int(self.mes)
+        año = int(self.año)
+        dia = int(self.dia)
+        d1 = datetime(año, mes, dia)
+
+
+        print (d1.strftime("%d/%m/%Y "))
+
+
+
+
+
+validarf = fecha("2021","2", "16")
+
+
+validarf.validar()
+validarf.generar_fecha_letra()
+validarf._str_()
